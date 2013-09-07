@@ -8,7 +8,7 @@ require([
 
 		function AsteroidsApp() {
 			var CANVAS_WIDTH = 800,
-				CANVAS_HEIGHT = 600;
+				CANVAS_HEIGHT = 300;
 
 			// Game initialisation
 			this.initialise = function() {

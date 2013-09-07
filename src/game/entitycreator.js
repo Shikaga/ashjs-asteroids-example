@@ -2,6 +2,7 @@ define([
 	'ash',
 	'game/components/asteroid',
 	'game/components/spaceship',
+	'game/components/mortal',
 	'game/components/bullet',
 	'game/components/position',
 	'game/components/motion',
@@ -9,14 +10,13 @@ define([
 	'game/components/gun',
 	'game/components/guncontrols',
 	'game/components/display',
-	'game/graphics/asteroidview',
-	'game/graphics/spaceshipview',
-	'game/graphics/bulletview',
+	'game/graphics/mortalview',
 	'brejep/keyboard'
 ], function (
 	Ash,
 	Asteroid,
 	Spaceship,
+	Mortal,
 	Bullet,
 	Position,
 	Motion,
@@ -24,9 +24,7 @@ define([
 	Gun,
 	GunControls,
 	Display,
-	AsteroidView,
-	SpaceshipView,
-	BulletView,
+	MortalView,
 	Keyboard
 ) {
 
@@ -47,14 +45,12 @@ define([
 			var asteroid = new Ash.Entity()
 				.add(new Asteroid())
 				.add(new Position(x, y, 0, radius))
-				.add(
-					new Motion(
+				.add(new Motion(
 						(Math.random() - 0.5) * 4 * (50 - radius),
 						(Math.random() - 0.5) * 4 * (50 - radius),
 						Math.random() * 2 - 1,
-						0
-				   )
-			   )
+						0)
+				)
 				.add(new Display(new AsteroidView(radius, this.graphics)));
 			this.game.addEntity(asteroid);
 			return asteroid;
@@ -71,6 +67,21 @@ define([
 				.add(new Display(new SpaceshipView(this.graphics)));
 			this.game.addEntity(spaceship);
 			return spaceship;
+		},
+
+		createMortal: function(x, y) {
+			var mortal = new Ash.Entity()
+				.add(new Mortal())
+				.add(new Position(x, y, 1, 6))
+				.add(new Motion(
+					(Math.random() - 0.5) * 4 * (50 - 30),
+					(Math.random() - 0.5) * 4 * (50 - 30),
+					Math.random() * 2 - 1,
+					0)
+				)
+				.add(new Display(new MortalView(5, this.graphics)));
+			this.game.addEntity(mortal);
+			return mortal;
 		},
 
 		createUserBullet: function(gun, parentPosition) {
