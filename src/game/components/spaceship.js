@@ -1,7 +1,7 @@
 define(['ash'], function (Ash) {
-    var Spaceship = Ash.Class.extend({
-        constructor: function () { }
-    });
+	var Spaceship = Ash.Class.extend({
+		constructor: function () { }
+	});
 
-    return Spaceship;
+	return Spaceship;
 });

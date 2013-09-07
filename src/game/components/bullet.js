@@ -1,9 +1,9 @@
 define(['ash'], function (Ash) {
-    var Bullet = Ash.Class.extend({
-        constructor: function (lifeTime) {
-            this.lifeRemaining = lifeTime;
-        }
-    });
+	var Bullet = Ash.Class.extend({
+		constructor: function (lifeTime) {
+			this.lifeRemaining = lifeTime;
+		}
+	});
 
-    return Bullet;
+	return Bullet;
 });
