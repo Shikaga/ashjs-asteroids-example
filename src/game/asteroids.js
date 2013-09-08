@@ -7,10 +7,10 @@ define([
 	'game/systems/movementsystem',
 	'game/systems/collisionsystem',
 	'game/systems/rendersystem',
+	'game/systems/overlaysystem',
 	'game/systems/systempriorities',
 	'game/entitycreator',
-	'ash',
-	'brejep/tickprovider',
+	'ash',,
 	'brejep/keypoll'
 ], function (
 	GameState,
@@ -21,6 +21,7 @@ define([
 	MovementSystem,
 	CollisionSystem,
 	RenderSystem,
+	OverlaySystem,
 	SystemPriorities,
 	EntityCreator,
 	Ash,
@@ -35,9 +36,8 @@ define([
 		gameState: null,
 		tickProvider: null,
 
-		constructor: function (canvas, stats) {
+		constructor: function (div, canvas) {
 			var canvasContext = canvas.getContext('2d');
-
 			this.width = canvas.width;
 			this.height = canvas.height;
 
@@ -45,7 +45,7 @@ define([
 
 			this.gameState = new GameState(this.width, this.height);
 
-			var creator = new EntityCreator(this.engine, canvasContext);
+			var creator = new EntityCreator(this.engine, div, canvasContext);
 
 			this.engine.addSystem(
 				new GameManager(this.gameState, creator),
@@ -70,12 +70,19 @@ define([
 			this.engine.addSystem(
 				new CollisionSystem(creator),
 				SystemPriorities.resolveCollisions
-		   );
+			);
 			this.engine.addSystem(
 				new RenderSystem(canvasContext),
 				SystemPriorities.render
-		   );
-			this.tickProvider = new TickProvider(stats);
+			);
+
+//			this.engine.addSystem(
+//				new OverlaySystem(div),
+//				SystemPriorities.render
+//			)
+
+			this.tickProvider = creator.createTickProvider();
+			creator.createDialog();
 		},
 
 		start: function () {

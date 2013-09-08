@@ -10,7 +10,11 @@ define([
 	'game/components/gun',
 	'game/components/guncontrols',
 	'game/components/display',
+	'game/components/ui',
 	'game/graphics/mortalview',
+	'game/uis/tickview',
+	'game/uis/dialogview',
+	'brejep/tickprovider',
 	'brejep/keyboard'
 ], function (
 	Ash,
@@ -24,7 +28,11 @@ define([
 	Gun,
 	GunControls,
 	Display,
+	UI,
 	MortalView,
+	TickView,
+	DialogView,
+	TickProvider,
 	Keyboard
 ) {
 
@@ -32,8 +40,9 @@ define([
 		game: null,
 		graphics: null,
 
-		constructor: function (game, graphics) {
+		constructor: function (game, overlay, graphics) {
 			this.game = game;
+			this.overlay = overlay;
 			this.graphics = graphics;
 		},
 
@@ -96,6 +105,28 @@ define([
 				.add(new Display(new BulletView(this.graphics)));
 			this.game.addEntity(bullet);
 			return bullet;
+		},
+
+		createTickProvider: function() {
+			var tickView = new TickView(this.overlay);
+			var tickProvider = new Ash.Entity()
+				.add(new TickProvider())
+				.add(new Position(0,0))
+				.add(new UI(tickView));
+			this.game.addEntity(tickProvider);
+
+			return tickView.tickProvider;
+		},
+
+		createDialog: function() {
+			var dialogView = new DialogView(this.overlay);
+			var dialogProvider = new Ash.Entity()
+				.add(new TickProvider())
+				.add(new Position(0,0))
+				.add(new UI(dialogView));
+			this.game.addEntity(dialogProvider);
+
+			return null;
 		}
 	});
 

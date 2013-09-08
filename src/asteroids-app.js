@@ -22,18 +22,7 @@ require([
 				// init keyboard poll
 				KeyPoll.initialise(window);
 
-				// init Stats
-				var stats = new Stats();
-				stats.setMode(0); // 0: fps, 1: ms
-
-				// Align top-left
-				stats.domElement.style.position = 'absolute';
-				stats.domElement.style.left = '0px';
-				stats.domElement.style.top = '0px';
-
-				gamewrapper.appendChild( stats.domElement );
-
-				var asteroids = new Asteroids(canvasElem, stats);
+				var asteroids = new Asteroids(gamewrapper, canvasElem);
 				asteroids.start();
 			};
 
