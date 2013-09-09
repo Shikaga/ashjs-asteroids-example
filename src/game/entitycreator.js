@@ -11,6 +11,7 @@ define([
 	'game/components/guncontrols',
 	'game/components/display',
 	'game/components/ui',
+	'game/components/uievent',
 	'game/graphics/mortalview',
 	'game/uis/tickview',
 	'game/uis/dialogview',
@@ -29,6 +30,7 @@ define([
 	GunControls,
 	Display,
 	UI,
+	UIEvent,
 	MortalView,
 	TickView,
 	DialogView,
@@ -121,7 +123,7 @@ define([
 		createDialog: function() {
 			var dialogView = new DialogView(this.overlay);
 			var dialogProvider = new Ash.Entity()
-				.add(new TickProvider())
+				.add(new UIEvent())
 				.add(new Position(0,0))
 				.add(new UI(dialogView));
 			this.game.addEntity(dialogProvider);

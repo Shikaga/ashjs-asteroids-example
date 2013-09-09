@@ -6,6 +6,7 @@ define([
 	'game/systems/bulletagesystem',
 	'game/systems/movementsystem',
 	'game/systems/collisionsystem',
+	'game/systems/uieventsystem',
 	'game/systems/rendersystem',
 	'game/systems/overlaysystem',
 	'game/systems/systempriorities',
@@ -20,6 +21,7 @@ define([
 	BulletAgeSystem,
 	MovementSystem,
 	CollisionSystem,
+	UIEventSystem,
 	RenderSystem,
 	OverlaySystem,
 	SystemPriorities,
@@ -62,7 +64,11 @@ define([
 			this.engine.addSystem(
 				new BulletAgeSystem(creator),
 				SystemPriorities.update
-		   );
+			);
+			this.engine.addSystem(
+				new UIEventSystem(creator),
+				SystemPriorities.update
+			);
 			this.engine.addSystem(
 				new MovementSystem(this.gameState),
 				SystemPriorities.move
