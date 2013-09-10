@@ -121,7 +121,7 @@ define([
 		},
 
 		createDialog: function() {
-			var dialogView = new DialogView(this.overlay);
+			var dialogView = new DialogView(this.overlay, "Click Me!");
 			var dialogProvider = new Ash.Entity()
 				.add(new UIEvent())
 				.add(new Position(0,0))
