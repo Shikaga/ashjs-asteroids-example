@@ -5,5 +5,9 @@ define(['ash'], function (Ash) {
 		}
 	});
 
+	UI.prototype.destroy = function() {
+		this.ui.destroy();
+	}
+
 	return UI;
 });

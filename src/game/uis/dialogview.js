@@ -28,7 +28,7 @@ define([],
 			//TODO: Will this work and not leak memory?
 			this.domElement.parentNode.removeChild(this.domElement);
 			delete this.domElement;
-		}
+		};
 
 		return DialogView;
 });

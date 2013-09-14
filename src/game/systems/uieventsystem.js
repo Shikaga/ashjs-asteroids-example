@@ -23,7 +23,6 @@ define([
 		update: function (time) {
 			for (var uievent = this.uievents.head; uievent; uievent = uievent.next) {
 				if (uievent.ui.ui.clicked === true) {
-					uievent.ui.ui.destroy();
 					this.creator.destroyEntity(uievent.entity);
 				}
 			}
